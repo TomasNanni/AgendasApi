@@ -8,7 +8,7 @@ namespace AgendasApi.Services
 {
     public class ContactService : IContactService
     {
-        private readonly ContactRepository _contactRepository = new ContactRepository;
+        private readonly ContactRepository _contactRepository = new();
         public ContactDto Create(CreateAndUpdateContactDto dto, int loggedUserId)
         {
             var contact = new Contact
@@ -62,12 +62,35 @@ namespace AgendasApi.Services
 
         public ContactWithGroupIdsDto? GetOneByUser(int userId, int contactId)
         {
-            throw new NotImplementedException();
+            Contact? contact = _contactRepository.GetOneByUser(userId, contactId);
+            var contactWithGroupIdsDto = new ContactWithGroupIdsDto
+            {
+                FirstName = contact.FirstName,
+                LastName = contact.LastName,
+                Address = contact.Address,
+                Number = contact.Number,
+                Email = contact.Email,
+                UrlImage = contact.UrlImage,
+                Company = contact.Company,
+                Description = contact.Description,
+            };
+            return contactWithGroupIdsDto;
         }
 
         public void Update(CreateAndUpdateContactDto dto, int contactId)
         {
-            throw new NotImplementedException();
+            var contact = new Contact
+            {
+                FirstName = dto.FirstName,
+                LastName = dto.LastName,
+                Address = dto.Address,
+                Number = dto.Number,
+                Email = dto.Email,
+                UrlImage = dto.UrlImage,
+                Company = dto.Company,
+                Description = dto.Description,
+            };
+            _contactRepository.Update(contact, contactId);
         }
     }
 }

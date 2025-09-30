@@ -1,4 +1,7 @@
-﻿namespace AgendasApi.Models.Interfaces
+﻿using AgendasApi.Models.DTOs.Contact.Requests;
+using AgendasApi.Models.DTOs.Contact.Responses;
+
+namespace AgendasApi.Models.Interfaces
 {
     public interface IContactService
     {
