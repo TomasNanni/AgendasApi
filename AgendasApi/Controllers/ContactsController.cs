@@ -26,17 +26,40 @@ namespace AgendasApi.Controllers
         }
 
         [HttpGet("{contactId}")]
-        public IActionResult GetOne(int contactId)
+        public IActionResult GetOne([FromQuery] int userId, int contactId)
+        {
+            var contact = _contactService.GetOneByUser(userId, contactId);
+            if (contact == null)
+            {
+                return NotFound();
+            }
+            else
+            {
+                return Ok(contact);
+            }
+        }
 
         [HttpPost]
-        public IActionResult CreateContact(CreateAndUpdateContactDto createContactDto)
+        public IActionResult CreateContact([FromQuery] int userId, CreateAndUpdateContactDto createContactDto)
+        {
+            var createdContact = _contactService.Create(createContactDto, userId);
+            return Created();
+        }
 
         [HttpPut]
         [Route("{contactId}")]
         public IActionResult UpdateContact(CreateAndUpdateContactDto dto, int contactId)
+        {
+            _contactService.Update(dto, contactId);
+            return NoContent();
+        }
 
         [HttpDelete]
         [Route("{contactId}")]
-
+        public IActionResult DeleteContact([FromQuery] int userId, int contactId)
+        {
+            _contactService.Delete(contactId);
+            return NoContent();
+        }
     }
 }
