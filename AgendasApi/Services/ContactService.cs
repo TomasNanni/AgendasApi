@@ -8,7 +8,12 @@ namespace AgendasApi.Services
 {
     public class ContactService : IContactService
     {
-        private readonly ContactRepository _contactRepository = new();
+        private readonly IContactRepository _contactRepository;
+
+        public ContactService(IContactRepository contactRepository)
+        {
+            _contactRepository = contactRepository;
+        }
         public ContactDto Create(CreateAndUpdateContactDto dto, int loggedUserId)
         {
             var contact = new Contact

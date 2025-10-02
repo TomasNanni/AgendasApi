@@ -9,10 +9,15 @@ namespace AgendasApi.Services
 {
     public class UserService : IUserService
     {
-        private readonly UserRepository userRepository =  new UserRepository(); 
+        private readonly IUserRepository _userRepository;
+
+        public UserService(IUserRepository userRepository)
+        {
+            _userRepository = userRepository;
+        }
         public bool CheckIfUserExists(int userId)
         {
-            return userRepository.CheckIfUserExists(userId);
+            return _userRepository.CheckIfUserExists(userId);
         }
 
         public UserDto Create(CreateAndUpdateUserDto dto)
@@ -24,7 +29,7 @@ namespace AgendasApi.Services
                 Email = dto.Email,
                 State = (User.MyEnum)dto.State,
             };
-            int newId = userRepository.Create(newUser);
+            int newId = _userRepository.Create(newUser);
             UserDto userDto = new UserDto
             {
                 Id = newId,
@@ -38,7 +43,7 @@ namespace AgendasApi.Services
 
         public IEnumerable<UserDto> GetAll()
         {
-            List<User> users = userRepository.GetAll();
+            List<User> users = _userRepository.GetAll();
             return users.Select(n => new UserDto
             {
                 Id = n.Id,
@@ -52,7 +57,7 @@ namespace AgendasApi.Services
 
         public GetUserByIdDto? GetById(int userId)
         {
-            var user = userRepository.GetById(userId);
+            var user = _userRepository.GetById(userId);
             if (user == null) {
                 return null;
             }
@@ -72,7 +77,7 @@ namespace AgendasApi.Services
 
         public void RemoveUser(int userId)
         {
-            userRepository.RemoveUser(userId);
+            _userRepository.RemoveUser(userId);
         }
 
         public void Update(CreateAndUpdateUserDto dto, int userId)
@@ -85,7 +90,7 @@ namespace AgendasApi.Services
                 Email = dto.Email,
                 State = (User.MyEnum)dto.State,
             };
-            userRepository.Update(updatedUser, userId);
+            _userRepository.Update(updatedUser, userId);
         }
     }
 }

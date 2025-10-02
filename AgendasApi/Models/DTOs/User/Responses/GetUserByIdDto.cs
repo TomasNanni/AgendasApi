@@ -16,10 +16,5 @@ namespace AgendasApi.Models.DTOs.User.Responses
             Deleted
         }
         public MyEnum State { get; set; } = MyEnum.Active;
-
-        public static implicit operator GetUserByIdDto(GetUserByIdDto v)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

@@ -1,4 +1,7 @@
-﻿namespace AgendasApi.Models.Interfaces
+﻿using AgendasApi.Models.DTOs.User.Requests;
+using AgendasApi.Models.DTOs.User.Responses;
+
+namespace AgendasApi.Models.Interfaces
 {
     public interface IUserService
     {

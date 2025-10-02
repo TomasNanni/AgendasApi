@@ -1,14 +1,29 @@
 ﻿using AgendasApi.Models.DTOs.Contact.Requests;
+using AgendasApi.Models.Interfaces;
+using AgendasApi.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace AgendasApi.Controllers
 {
-    public class ContactsController : Controller
+    [Route("api/[controller]")]
+    [ApiController]
+    public class ContactsController : ControllerBase
     {
-        ContactsController
+        private readonly IContactService _contactService;
+
+        public ContactsController(IContactService contactService)
+        {
+            _contactService = contactService;
+        }
 
         [HttpGet]
-        public IActionResult GetAll()
+        public IActionResult GetAll([FromQuery] int userId)
+        {
+            var contacts = _contactService.GetAllByUser(userId);
+
+            return Ok(contacts);
+        }
 
         [HttpGet("{contactId}")]
         public IActionResult GetOne(int contactId)
