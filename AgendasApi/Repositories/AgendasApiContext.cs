@@ -20,7 +20,7 @@ namespace AgendasApi.Repositories
                 LastName = "nanni",
                 Password = "contraseña",
                 Email= "miemail",
-                State = User.MyEnum.Active,
+                State = Models.State.Active,
             };
 
             modelBuilder.Entity<User>().HasData(luis);

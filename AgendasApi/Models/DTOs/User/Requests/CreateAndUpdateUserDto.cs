@@ -10,11 +10,6 @@ namespace AgendasApi.Models.DTOs.User.Requests
         [EmailAddress]
         [Required]
         public string Email { get; set; }
-        public enum MyEnum
-        {
-            Active,
-            Deleted
-        }
-        public MyEnum State { get; set; } = MyEnum.Active;
+        public State State { get; set; } = State.Active;
     }
 }

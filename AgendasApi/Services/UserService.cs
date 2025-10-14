@@ -27,7 +27,7 @@ namespace AgendasApi.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                State = (User.MyEnum)dto.State,
+                State = dto.State,
             };
             int newId = _userRepository.Create(newUser);
             UserDto userDto = new UserDto
@@ -36,7 +36,7 @@ namespace AgendasApi.Services
                 FirstName = dto.FirstName,
                 LastName = dto.LastName,
                 Email = dto.Email,
-                State = (UserDto.MyEnum)dto.State, 
+                State = dto.State, 
             };
             return userDto;
         }
@@ -51,7 +51,7 @@ namespace AgendasApi.Services
                 LastName = n.LastName,
                 Password = n.Password,
                 Email = n.Email,
-                State = (UserDto.MyEnum)n.State,
+                State = n.State,
             });
         }
 
@@ -88,7 +88,7 @@ namespace AgendasApi.Services
                 LastName = dto.LastName,
                 Password = dto.Password,
                 Email = dto.Email,
-                State = (User.MyEnum)dto.State,
+                State = dto.State,
             };
             _userRepository.Update(updatedUser, userId);
         }

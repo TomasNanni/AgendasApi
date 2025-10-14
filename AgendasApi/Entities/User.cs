@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using AgendasApi.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace AgendasApi.Entities
 {
@@ -11,11 +12,6 @@ namespace AgendasApi.Entities
         [EmailAddress]
         [Required]
         public string Email { get; set; }
-        public enum MyEnum
-        {
-            Active,
-            Deleted
-        }
-        public MyEnum State { get; set; } = MyEnum.Active;
+        public State State { get; set; } = State.Active;
     }
 }

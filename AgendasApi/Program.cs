@@ -22,7 +22,9 @@ namespace AgendasApi
             builder.Services.AddDbContext<AgendasApiContext>(dbContextOptions => dbContextOptions.UseSqlite(builder.Configuration["ConnectionStrings:AgendasAPIDBConnectionString"]));
 
             builder.Services.AddScoped<IContactService, ContactService>();
-
+            builder.Services.AddScoped<IContactRepository, ContactRepository>();
+            builder.Services.AddScoped<IUserService, UserService>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
